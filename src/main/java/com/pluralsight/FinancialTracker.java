@@ -212,15 +212,20 @@ public class FinancialTracker {
         System.out.println("All transactions:" );
         //for each loop iterates through each Transaction object in the list and calls toString method
         for (Transaction transaction : transactions) {
-            System.out.println(transaction.toString());
+//            System.out.println(transaction.toString());
+        System.out.println("Date: " + transaction.getDate() + "|" + "Time: " + transaction.getTime() + "|" + " Description: " +
+        transaction.getDescription() + "Vendor: " + transaction.getVendor() + "|" + " Amount: " + transaction.getAmount());
         }
+
     }
     //displaying positive transactions
     private static void displayDeposits() {
         System.out.println("Deposit transactions: ");
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() >= 0){
-                System.out.println(transaction.toString());
+//                System.out.println(transaction.toString());
+            System.out.println("Date: " + transaction.getDate() + "|" + "Time: " + transaction.getTime() + "|" + " Description: " +
+            transaction.getDescription() + "Vendor: " + transaction.getVendor() + "|" + " Amount: " + transaction.getAmount());
             }
         }
     }
@@ -229,8 +234,11 @@ public class FinancialTracker {
         System.out.println("Payment transactions: ");
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() <= 0){
-                System.out.println(transaction.toString());
+//                System.out.println(transaction.toString());
+            System.out.println("Date: " + transaction.getDate() + "|" + "Time: " + transaction.getTime() + "|" + " Description: " +
+            transaction.getDescription() + "Vendor: " + transaction.getVendor() + "|" + " Amount: " + transaction.getAmount());
             }
+
 
         }
     }
