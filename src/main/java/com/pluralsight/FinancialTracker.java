@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,10 +24,10 @@ public class FinancialTracker {
         boolean running = true;
 
         // testing loadTransactions method.
-        System.out.println("Loaded transactions:");
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction);
-        }
+//        System.out.println("Transactions:");
+//        for (Transaction transaction : transactions) {
+//            System.out.println(transaction);
+//        }
 
         while (running) {
             System.out.println("Welcome to TransactionApp");
@@ -62,7 +63,14 @@ public class FinancialTracker {
 
     public static void loadTransactions(String fileName) {
         String line;
+        //creating a file if it does not exist
+        File file = new File("transactions.csv");
         try {
+            //handling case if file does not exist
+            if (!file.exists()){
+                file.createNewFile();
+                System.out.println("File was created");
+            }
             BufferedReader br = new BufferedReader( new FileReader(FILE_NAME));
             while ((line = br.readLine()) !=null ){
                 String[] parts = line.split("\\|");
@@ -72,13 +80,14 @@ public class FinancialTracker {
                 String vendor = parts[3];
                 double amount = Double.parseDouble(parts[4]);
 
+                //new transaction object with values above
                 Transaction transaction = new Transaction(date, time, description, vendor, amount);
+                //adding transaction to an ArrayList
                 transactions.add(transaction);
-
             }
             br.close();
         } catch (Exception e) {
-            System.out.println( "An error has occurred, please try again ");
+            System.err.println( "An error has occurred, please try again ");
             e.printStackTrace();
         }
 
