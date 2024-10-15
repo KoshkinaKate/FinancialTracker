@@ -1,6 +1,9 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,6 +21,12 @@ public class FinancialTracker {
         loadTransactions(FILE_NAME);
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+
+        // testing loadTransactions method.
+        System.out.println("Loaded transactions:");
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
+        }
 
         while (running) {
             System.out.println("Welcome to TransactionApp");
@@ -52,8 +61,28 @@ public class FinancialTracker {
     }
 
     public static void loadTransactions(String fileName) {
-        // This method should load transactions from a file with the given file name.
-        // If the file does not exist, it should be created.
+        String line;
+        try {
+            BufferedReader br = new BufferedReader( new FileReader(FILE_NAME));
+            while ((line = br.readLine()) !=null ){
+                String[] parts = line.split("\\|");
+                LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER);
+                LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+
+                Transaction transaction = new Transaction(date, time, description, vendor, amount);
+                transactions.add(transaction);
+
+            }
+            br.close();
+        } catch (Exception e) {
+            System.out.println( "An error has occurred, please try again ");
+            e.printStackTrace();
+        }
+
+        // If the file does not exist, it should be created. -??
         // The transactions should be stored in the `transactions` ArrayList.
         // Each line of the file represents a single transaction in the following format:
         // <date>|<time>|<description>|<vendor>|<amount>
