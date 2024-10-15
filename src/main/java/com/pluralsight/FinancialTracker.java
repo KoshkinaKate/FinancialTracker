@@ -90,22 +90,40 @@ public class FinancialTracker {
             System.err.println( "An error has occurred, please try again ");
             e.printStackTrace();
         }
-
-        // If the file does not exist, it should be created. -??
-        // The transactions should be stored in the `transactions` ArrayList.
-        // Each line of the file represents a single transaction in the following format:
-        // <date>|<time>|<description>|<vendor>|<amount>
-        // For example: 2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
-        // After reading all the transactions, the file should be closed.
-        // If any errors occur, an appropriate error message should be displayed.
     }
 
     private static void addDeposit(Scanner scanner) {
-        // This method should prompt the user to enter the date, time, description, vendor, and amount of a deposit.
-        // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
-        // The amount should be a positive number.
-        // After validating the input, a new `Transaction` object should be created with the entered values.
-        // The new deposit should be added to the `transactions` ArrayList.
+        try {
+            System.out.println("Enter the date in the following format yyyy-MM-dd");
+            String dateInput = scanner.nextLine();
+            LocalDate date = LocalDate.parse(dateInput, DATE_FORMATTER); //parse String into LocalDate
+
+            System.out.println("Enter the time in the following format HH:mm:ss");
+            String timeInput = scanner.nextLine();
+            LocalTime time = LocalTime.parse(timeInput, TIME_FORMATTER);
+
+            System.out.println("Enter description: ");
+            String description = scanner.nextLine();
+
+            System.out.println("Enter a vendor");
+            String vendor = scanner.nextLine();
+
+            System.out.println("Enter amount");
+            double amount = scanner.nextDouble();
+
+            //check if entered number is positive
+            if ( amount <= 0 ){
+                System.out.println("In order to deposit funds the amount must be positive, please try again");
+            }
+
+            Transaction transaction = new Transaction(date, time, description, vendor, amount);
+            transactions.add(transaction);
+            
+            System.out.println( "Thank you for the deposit of $" + amount);
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        }
+
     }
 
     private static void addPayment(Scanner scanner) {
