@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -110,15 +108,22 @@ public class FinancialTracker {
 
             System.out.println("Enter amount");
             double amount = scanner.nextDouble();
-//          scanner.nextLine(); //consumes extra line
+            scanner.nextLine(); //consumes extra line
 
             //check if entered number is positive
             if ( amount <= 0 ){
                 System.out.println("In order to deposit funds the amount must be positive, please try again");
+                return; //finishes method if above is true
             }
 
             Transaction transaction = new Transaction(date, time, description, vendor, amount);
             transactions.add(transaction);
+
+            BufferedWriter myWriter = new BufferedWriter(new FileWriter (FILE_NAME, true)); //true means it appends and not overwrite
+            myWriter.write(transaction.toString());
+            myWriter.newLine();
+            myWriter.close();
+
 
             System.out.println( "Thank you for the deposit of $" + amount);
         } catch (Exception e) {
@@ -157,6 +162,10 @@ public class FinancialTracker {
 
             Transaction transaction = new Transaction(date, time, description, vendor, negativeAmount);
             transactions.add(transaction);
+            BufferedWriter myWriter = new BufferedWriter(new FileWriter (FILE_NAME, true)); //true means it appends and not overwrite
+            myWriter.write(transaction.toString());
+            myWriter.newLine();
+            myWriter.close();
 
             System.out.println( "Thank you for the payment of $" + amount);
         } catch (Exception e) {
@@ -198,7 +207,7 @@ public class FinancialTracker {
             }
         }
     }
-
+    //displaying all transactions
     private static void displayLedger() {
         System.out.println("All transactions:" );
         //for each loop iterates through each Transaction object in the list and calls toString method
@@ -206,7 +215,7 @@ public class FinancialTracker {
             System.out.println(transaction.toString());
         }
     }
-
+    //displaying positive transactions
     private static void displayDeposits() {
         System.out.println("Deposit transactions: ");
         for (Transaction transaction : transactions) {
@@ -215,7 +224,7 @@ public class FinancialTracker {
             }
         }
     }
-
+    //displaying negative transactions
     private static void displayPayments() {
         System.out.println("Payment transactions: ");
         for (Transaction transaction : transactions) {

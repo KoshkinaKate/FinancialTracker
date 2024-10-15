@@ -59,7 +59,6 @@ public class Transaction {
     }
     // Override toString to display transaction details
     public String toString() {
-        return String.format("Date: %s| Time: %s| Description: %s| Vendor: %s| Amount: %.2f",
-                date, time, description, vendor, amount);
+        return String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, amount);
     }
 }
