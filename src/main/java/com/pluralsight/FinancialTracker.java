@@ -24,10 +24,10 @@ public class FinancialTracker {
         boolean running = true;
 
         // testing loadTransactions method.
-        System.out.println("Transactions:");
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction);
-        }
+//        System.out.println("Transactions:");
+//        for (Transaction transaction : transactions) {
+//            System.out.println(transaction);
+//        }
 
         while (running) {
             System.out.println("Welcome to TransactionApp");
@@ -147,7 +147,7 @@ public class FinancialTracker {
             System.out.println("Enter amount");
             double amount = scanner.nextDouble();
             scanner.nextLine(); //consumes extra line
-            
+
             //check if entered number is positive
             if ( amount <= 0 ){
                 System.out.println("In order to make a payment the amount must be positive, please try again");
@@ -162,7 +162,6 @@ public class FinancialTracker {
         } catch (Exception e) {
             System.out.println("Invalid input");
         }
-
     }
 
     private static void ledgerMenu(Scanner scanner) {
@@ -201,8 +200,11 @@ public class FinancialTracker {
     }
 
     private static void displayLedger() {
-        // This method should display a table of all transactions in the `transactions` ArrayList.
-        // The table should have columns for date, time, description, vendor, and amount.
+        System.out.println("All transactions:" );
+        //for each loop iterates through each Transaction object in the list and calls toString method
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction.toString());
+        }
     }
 
     private static void displayDeposits() {
