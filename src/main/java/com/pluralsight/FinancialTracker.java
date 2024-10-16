@@ -258,10 +258,13 @@ public class FinancialTracker {
             String input = scanner.nextLine().trim();
 
             switch (input) {
-                case "1":
-                    // Generate a report for all transactions within the current month,
-                    // including the date, time, description, vendor, and amount for each transaction.
-                case "2":
+                case "1": //month to date transactions
+                    LocalDate today = LocalDate.now();
+                    LocalDate firstDayOfMonth = today.withDayOfMonth(1);
+                    filterTransactionsByDate(firstDayOfMonth , today);
+                    break;
+
+                case "2": //previous month transactions
                     // Generate a report for all transactions within the previous month,
                     // including the date, time, description, vendor, and amount for each transaction.
                 case "3":
@@ -285,11 +288,28 @@ public class FinancialTracker {
 
 
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
-        // This method filters the transactions by date and prints a report to the console.
-        // It takes two parameters: startDate and endDate, which represent the range of dates to filter by.
-        // The method loops through the transactions list and checks each transaction's date against the date range.
-        // Transactions that fall within the date range are printed to the console.
-        // If no transactions fall within the date range, the method prints a message indicating that there are no results.
+        boolean running = false;
+        System.out.println("Transactions from " + startDate + " to " + endDate + ":");
+
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = transaction.getDate();
+
+            if ((transactionDate.isEqual(startDate) || transactionDate.isAfter(startDate)) &&
+                    (transactionDate.isEqual(endDate) || transactionDate.isBefore(endDate))) {
+
+                System.out.println("Date: " + transaction.getDate());
+                System.out.println("Time: " + transaction.getTime());
+                System.out.println("Vendor: " + transaction.getVendor());
+                System.out.println("Description: " + transaction.getDescription());
+                System.out.println("Amount: " + transaction.getAmount());
+                System.out.println("==========================");
+                running = true; // found at least one transaction
+            }
+        }
+
+        if (!running) {
+            System.out.println("No transactions found");
+        }
     }
 
     private static void filterTransactionsByVendor(String vendor) {
