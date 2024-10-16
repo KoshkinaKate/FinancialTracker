@@ -31,7 +31,7 @@ Instructions on how to set up and run the project using IntelliJ IDEA.
 ### Prerequisites
 
 - **IntelliJ IDEA**: Ensure you have IntelliJ IDEA installed, which you can download from [here](https://www.jetbrains.com/idea/download/).
-- **Java JDK 17 **: Make sure Java JDK 17 is installed and configured in IntelliJ.
+- **Java JDK 17**: Make sure Java JDK 17 is installed and configured in IntelliJ.
 
 ### Running the Application in IntelliJ
 
@@ -52,11 +52,24 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 Here are some screenshots that showcase the functionality of the application:
 
+**Deposit Functionality:**
 ![DepositFunctionality.png](imgs/DepositFunctionality.png)
-![PaymentFunctionality.png](imgs/PaymentFunctionality.png)![All Transactions.png](imgs/All%20Transactions.png)
-![Payments&Deposit.png](imgs/Payments%26Deposit.png)![MonthsToDate.png](imgs/MonthsToDate.png)
-![PreviousMonth.png](imgs/PreviousMonth.png)![PreviousYear.png](imgs/PreviousYear.png)
-![YearToDate.png](imgs/YearToDate.png)![Vendor.png](imgs/Vendor.png)
+**Payment Functionality:**
+![PaymentFunctionality.png](imgs/PaymentFunctionality.png)
+**Loading All Transactions:**
+![All Transactions.png](imgs/All%20Transactions.png)
+**Payment and Deposit Transactions:**
+![Payments&Deposit.png](imgs/Payments%26Deposit.png)
+**Month to Date Transactions:**
+![MonthsToDate.png](imgs/MonthsToDate.png)
+**Previous Month Transactions:**
+![PreviousMonth.png](imgs/PreviousMonth.png)
+**Current Year Transactions:**
+![YearToDate.png](imgs/YearToDate.png)
+**Previous Year Transactions:**
+![PreviousYear.png](imgs/PreviousYear.png)
+**Vendor Search:**
+![Vendor.png](imgs/Vendor.png)
 ## Future Work
 
 Potential future enhancements or functionalities that could be added to the Financial Tracker include:
