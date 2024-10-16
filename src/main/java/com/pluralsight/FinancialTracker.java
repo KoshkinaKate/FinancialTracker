@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -256,18 +257,23 @@ public class FinancialTracker {
             System.out.println("0) Back");
 
             String input = scanner.nextLine().trim();
+            LocalDate today = LocalDate.now();
+
 
             switch (input) {
                 case "1": //month to date transactions
-                    LocalDate today = LocalDate.now();
                     LocalDate firstDayOfMonth = today.withDayOfMonth(1);
                     filterTransactionsByDate(firstDayOfMonth , today);
                     break;
 
                 case "2": //previous month transactions
-                    // Generate a report for all transactions within the previous month,
-                    // including the date, time, description, vendor, and amount for each transaction.
+                    LocalDate firstDayOfPrevMonth = today.minusMonths(1).withDayOfMonth(1);
+                    LocalDate lastDayOfPrevMonth = firstDayOfPrevMonth.withDayOfMonth(firstDayOfPrevMonth.lengthOfMonth());
+                    filterTransactionsByDate(firstDayOfPrevMonth, lastDayOfPrevMonth );
+                    break;
+
                 case "3":
+
                     // Generate a report for all transactions within the current year,
                     // including the date, time, description, vendor, and amount for each transaction.
 
@@ -288,7 +294,7 @@ public class FinancialTracker {
 
 
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
-        boolean running = false;
+        boolean running = false; //as of now - not transactions fount yet
         System.out.println("Transactions from " + startDate + " to " + endDate + ":");
 
         for (Transaction transaction : transactions) {
@@ -303,7 +309,7 @@ public class FinancialTracker {
                 System.out.println("Description: " + transaction.getDescription());
                 System.out.println("Amount: " + transaction.getAmount());
                 System.out.println("==========================");
-                running = true; // found at least one transaction
+                running = true; // found at least one transaction match
             }
         }
 
