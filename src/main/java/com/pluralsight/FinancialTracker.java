@@ -277,9 +277,12 @@ public class FinancialTracker {
                     filterTransactionsByDate(firstDayOfYear, today);
                     break;
 
-                case "4":
-                    // Generate a report for all transactions within the previous year,
-                    // including the date, time, description, vendor, and amount for each transaction.
+                case "4": //previous year transactions
+                    LocalDate firstDayOfPrevYear = today.minusYears(1).withDayOfYear(1);
+                    LocalDate lastDayOfPrevYear = today.minusYears(1).withMonth(12).withDayOfMonth(31);
+                    filterTransactionsByDate(firstDayOfPrevYear, lastDayOfPrevYear);
+                    break;
+                    
                 case "5":
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
                     // with that vendor, including the date, time, description, vendor, and amount for each transaction.
