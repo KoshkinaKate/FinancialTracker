@@ -282,9 +282,12 @@ public class FinancialTracker {
                     filterTransactionsByDate(firstDayOfPrevYear, lastDayOfPrevYear);
                     break;
 
-                case "5":
-                    // Prompt the user to enter a vendor name, then generate a report for all transactions
-                    // with that vendor, including the date, time, description, vendor, and amount for each transaction.
+                case "5": //user inputs vendor's name to get a report
+                    System.out.println("Please enter a Vendor name : ");
+                    String vendor = scanner.nextLine();
+                    filterTransactionsByVendor(vendor);
+                    break;
+
                 case "0":
                     running = false;
                 default:
