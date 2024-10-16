@@ -3,7 +3,6 @@ package com.pluralsight;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -282,7 +281,7 @@ public class FinancialTracker {
                     LocalDate lastDayOfPrevYear = today.minusYears(1).withMonth(12).withDayOfMonth(31);
                     filterTransactionsByDate(firstDayOfPrevYear, lastDayOfPrevYear);
                     break;
-                    
+
                 case "5":
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
                     // with that vendor, including the date, time, description, vendor, and amount for each transaction.
@@ -322,6 +321,23 @@ public class FinancialTracker {
     }
 
     private static void filterTransactionsByVendor(String vendor) {
+        boolean running = false;
+        System.out.println("Results for Vendor " + vendor);
+
+        for (Transaction transaction : transactions) {
+            String vendorName = transaction.getVendor();
+            if (vendorName.equalsIgnoreCase(vendor)){
+                System.out.println("Date: " + transaction.getDate());
+                System.out.println("Time: " + transaction.getTime());
+                System.out.println("Description: " + transaction.getDescription());
+                System.out.println("Amount: " + transaction.getAmount());
+                System.out.println("==========================");
+                running = true;
+            }
+        }
+        if (!running) {
+            System.out.println("No Vendors found");
+        }
         // This method filters the transactions by vendor and prints a report to the console.
         // It takes one parameter: vendor, which represents the name of the vendor to filter by.
         // The method loops through the transactions list and checks each transaction's vendor name against the specified vendor name.
